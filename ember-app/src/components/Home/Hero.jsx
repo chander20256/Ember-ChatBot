@@ -7,17 +7,17 @@ const Hero = () => {
       <img
         src="animations/3.gif"
         alt=""
-        className="absolute top-[6%] left-[14%] sm:top-[10%] sm:left-[10%] md:top-[3%] md:left-[10%] w-52 md:w-64 pointer-events-none z-10"
+        className="absolute top-[6%] left-[10%] sm:top-[10%] sm:left-[10%] md:top-[3%] md:left-[10%] w-52 md:w-64 pointer-events-none z-10"
       />
       <img
         src="animations/5.gif"
         alt=""
-        className="hidden sm:block absolute top-[10%] right-[50%] sm:top-[10%] sm:right-[10%] md:top-[3%] md:right-[10%] w-32 md:w-64 pointer-events-none z-10"
+        className="hidden sm:block absolute top-[10%] right-[50%] sm:top-[10%] sm:right-[10%] md:top-[3%] md:right-[20%] w-32 md:w-64 pointer-events-none z-10"
       />
       <img
         src="animations/6.gif"
         alt=""
-        className="absolute top-[10%] right-[10%] sm:top-[30%] sm:right-[0%] md:top-[30%] md:right-[0%] w-32 md:w-64 pointer-events-none z-10"
+        className="absolute top-[20%] right-[10%] sm:top-[30%] sm:right-[0%] md:top-[30%] md:right-[0%] w-32 md:w-64 pointer-events-none z-10"
       />
       <img
         src="animations/2.gif"
