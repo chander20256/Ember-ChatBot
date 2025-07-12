@@ -1,138 +1,90 @@
-import React, { useState } from 'react';
+import { Menu, X } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
-  const styles = {
-    navbar: {
-      position: 'fixed',         // Makes the navbar fixed
-      top: 0,                    // Stick to top
-      left: 0,
-      right: 0,
-      zIndex: 999,              // Keep it above other content
-      width: '100%',
-      padding: '20px 40px',
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      backgroundColor: '#fdfcdc',
-      flexWrap: 'nowrap',
-      boxSizing: 'border-box',
-      // boxShadow: '0 2px 10px rgba(0,0,0,0.05)', // Optional: subtle shadow on scroll
-    },
-
-    brand: {
-      fontFamily: 'Just Cosmic',
-      fontSize: '32px',
-      fontWeight: 400,
-      letterSpacing: '0.1em',
-      color: '#000',
-      whiteSpace: 'nowrap',
-    },
-    rightSide: {
-      display: 'flex',
-      alignItems: 'center',
-      gap: '16px',
-      flexShrink: 0,
-    },
-    navLinks: {
-      display: 'flex',
-      gap: '20px',
-    },
-    link: {
-      fontSize: '16px',
-      fontWeight: 500,
-      color: '#333',
-      cursor: 'pointer',
-      whiteSpace: 'nowrap',
-    },
-    loginButton: {
-      backgroundColor: '#0081A7',
-      color: '#fff',
-      border: 'none',
-      borderRadius: '50px',
-      padding: '12px 24px',
-      fontWeight: 600,
-      fontSize: '14px',
-      cursor: 'pointer',
-      whiteSpace: 'nowrap',
-    },
-    hamburger: {
-      fontSize: '24px',
-      background: 'none',
-      border: 'none',
-      cursor: 'pointer',
-      display: 'none',
-    },
-    mobileMenu: {
-      position: 'absolute',
-      top: '100%',
-      right: '40px',
-      background: '#fff',
-      border: '1px solid #ddd',
-      borderRadius: '10px',
-      padding: '20px',
-      display: 'flex',
-      flexDirection: 'column',
-      gap: '15px',
-      zIndex: 99,
-    },
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
   };
 
-  return (
-    <nav style={styles.navbar}>
-      {/* Brand */}
-      <h1 style={styles.brand}>EMBER</h1>
+  const links = [
+    { name: 'Privacy Policy', href: '/privacy' },
+    { name: 'Need Help?', href: '/help' },
+  ];
 
-      {/* Right side */}
-      <div style={styles.rightSide}>
-        {/* Desktop Nav Links */}
-        <div className="nav-links" style={styles.navLinks}>
-          <span style={styles.link}>Privacy Policy</span>
-          <span style={styles.link}>Need Help?</span>
+  useEffect(() => {
+    const closeMenuOnResize = () => {
+      if (window.innerWidth >= 768) {
+        setIsOpen(false);
+      }
+    };
+    window.addEventListener('resize', closeMenuOnResize);
+    return () => window.removeEventListener('resize', closeMenuOnResize);
+  }, []);
+
+  return (
+    <div className="relative z-50 w-full">
+      {/* Fixed Navbar */}
+      <nav className="fixed top-0 left-0 w-full bg-[#fefddf] flex justify-between items-center py-4 px-4 md:px-20 z-40">
+        {/* Logo */}
+        <div>
+          <h1 className="logo-font ">EMBER</h1>
         </div>
 
-        {/* Login */}
-        <button style={styles.loginButton}>Login</button>
+        {/* Desktop Links */}
+        <div className="hidden md:flex gap-6 items-center">
+          {links.map((link) => (
+            <NavLink
+              key={link.name}
+              to={link.href}
+              className="text-sm text-black hover:underline"
+            >
+              {link.name}
+            </NavLink>
+          ))}
+          <NavLink
+            to="/login"
+            className="bg-[#0085a1] text-white text-sm font-semibold py-2 px-5 rounded-full hover:bg-[#006c87] transition"
+          >
+            LOG IN
+          </NavLink>
+        </div>
 
-        {/* ☰ Menu Button */}
-        <button
-          style={styles.hamburger}
-          className="hamburger"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          ☰
-        </button>
-      </div>
+        {/* Mobile Buttons */}
+        <div className="flex items-center gap-3 md:hidden">
+          <NavLink
+            to="/login"
+            className="bg-[#0085a1] text-white text-sm font-semibold py-1.5 px-4 rounded-full hover:bg-[#006c87] transition"
+          >
+            LOG IN
+          </NavLink>
+          <button onClick={handleToggle} className="focus:outline-none">
+            {isOpen ? <X className="text-black" /> : <Menu className="text-black" />}
+          </button>
+        </div>
+      </nav>
 
-      {/* Dropdown on mobile */}
-      {menuOpen && (
-        <div className="mobile-menu" style={styles.mobileMenu}>
-          <span style={styles.link}>Privacy Policy</span>
-          <span style={styles.link}>Need Help?</span>
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="fixed top-[72px] right-0 h-screen w-3/4 max-w-xs bg-[#0085a1] text-white z-40 shadow-lg p-5 transition-all duration-300">
+          <div className="flex flex-col gap-6 mt-10">
+            {links.map((link) => (
+              <NavLink
+                key={link.name}
+                to={link.href}
+                className="w-full text-center p-2 rounded-lg hover:bg-white hover:text-black text-base transition"
+                onClick={() => setTimeout(() => setIsOpen(false), 200)}
+              >
+                {link.name}
+              </NavLink>
+            ))}
+          </div>
         </div>
       )}
-
-      {/* Responsive overrides */}
-      <style>{`
-        @import url('https://fonts.cdnfonts.com/css/just-cosmic');
-
-        @media (max-width: 768px) {
-          .nav-links {
-            display: none !important;
-          }
-          .hamburger {
-            display: inline-block !important;
-          }
-        }
-
-        @media (max-width: 500px) {
-          h1 {
-            font-size: 24px !important;
-          }
-        }
-      `}</style>
-    </nav>
+    </div>
   );
 };
 

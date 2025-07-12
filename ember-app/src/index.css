@@ -1,14 +1,31 @@
+@import "tailwindcss";
+
+@layer components {
+    .responsivewidth {
+      @apply mx-auto w-[90%] sm:w-[90%] md:w-[88%] lg:w-[89.5%];
+    }
+  }
+
+.logo-font {
+  font-family: 'Just Cosmic';
+  font-size: 32px;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+
 /* Universal Reset */
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} */
 
 /* Base Body Styles */
-body {
+/* body {
   width: 100%;
   background-color: #fdfcdc;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-}
+} */
