@@ -31,7 +31,7 @@ const Navbar = () => {
       <nav className="fixed top-0 left-0 w-full bg-[#fefddf] flex justify-between items-center py-4 px-4 md:px-20 z-40">
         {/* Logo */}
         <div>
-          <h1 className="logo-font ">EMBER</h1>
+          <NavLink to="/" className="logo-font hover:opacity-80">EMBER</NavLink>
         </div>
 
         {/* Desktop Links */}
@@ -69,8 +69,8 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="fixed top-[72px] right-0 h-screen w-3/4 max-w-xs bg-[#0085a1] text-white z-40 shadow-lg p-5 transition-all duration-300">
-          <div className="flex flex-col gap-6 mt-10">
+        <div className="fixed top-[65px] right-0 h-screen w-1/2 max-w-xs bg-[#0085a1] text-white z-40 shadow-lg p-5 transition-all duration-300">
+          <div className="flex flex-col gap-6 mt-5">
             {links.map((link) => (
               <NavLink
                 key={link.name}

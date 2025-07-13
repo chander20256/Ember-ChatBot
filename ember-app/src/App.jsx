@@ -1,51 +1,45 @@
-import React from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import AppLayout from './AppLayout'
-import Home from './Home/Home'
+// App.jsx
 
-// import Projects from './Projects/Projects'
-// import Contact from './ContactUs/Contact'
-// import About from './About/About'
-// import ScrollToTop from './Scroll'
-
-
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import AppLayout from './AppLayout';
+import Home from './Pages/Home/Home';
+import Login from './Pages/Login/Page';
+import Signup from './Pages/signup/page';
+import PrivacyPolicy from './Pages/privacypolicy/page';
+import Help from './Pages/Help/page'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <AppLayout />,
-   
-  
     children: [
       {
-        path: "/",
-        element: <Home />
+        path: '/',
+        element: <Home />,
       },
-      // {
-      //   path: "/projects",
-      //   element: <Projects />
-      // },
-      // {
-      //   path: "/contact",
-      //   element: <Contact />
-      // },
-      // {
-      //   path: "/about",
-      //   element: <About />
-      // },
-  
-  
-    
-    ]
-  }
-])
+      {
+        path: '/login',
+        element: <Login />,
+      },
+      {
+        path: '/signup',
+        element: <Signup />,
+      },
+      {
+        path: '/privacy',
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: '/help',
+        element: <Help />,
+      }
+    ],
+  },
+]);
 
 const App = () => {
-  return (
-    <div className=' '>
-      <RouterProvider router={router} />
-    </div>
-  )
-}
+  return <RouterProvider router={router} />;
+};
 
-export default App
+export default App;
